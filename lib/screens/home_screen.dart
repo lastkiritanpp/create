@@ -1,11 +1,15 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:untitled2/screens/hotel_screen.dart';
 import 'package:untitled2/screens/ticket_view.dart';
+import 'package:untitled2/utils/app_info_list.dart';
 import 'package:untitled2/utils/app_styles.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
 
   get style => null;
 
@@ -92,7 +96,44 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const Gap(15),
-          TicketView(),
+          SingleChildScrollView(
+            padding:  const EdgeInsets.only(left: 20),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: ticketList.map((SingleTicket) => TicketView(ticket: SingleTicket)).toList(),
+            ),
+          ),
+          const Gap(15),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal:  20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Hotels",
+                  style: Styles.headLineStyle2,
+                ),
+                InkWell(
+                  onTap: () {
+                    print("You are tapped");
+                  },
+                  child: Text(
+                    "View all",
+                    style: Styles.textStyle
+                        .copyWith(color: Styles.primaryColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Gap(15),
+          SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: hotelList.map((SinglHotel) => HotelScreen(hotel: SinglHotel)).toList()
+              ),
+          ),
         ],
       ),
     );
